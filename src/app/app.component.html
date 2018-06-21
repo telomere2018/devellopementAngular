@@ -7,16 +7,18 @@
           <!--atention pour un string litéral "'maChaine'"
           pour un nom de variable "maVariable"-->
           <p>dernière mis à jour {{ lastUpdate | async | date :short }}</p>
-         <app-appareil *ngFor = "let appareil of appareils"
+         <app-appareil *ngFor = "let appareil of appareils; let i = index"
          
 
-          [appareilName]="appareil.name" 
-          [appareilStatus]="appareil.status"></app-appareil>
-         
+          [appareilName] ="appareil.name" 
+          [appareilStatus] ="appareil.status"
+           [index] = "i" ></app-appareil>
          
         </ul>
-        <button class="btn btn-success" [disabled]="isAuth" 
+        <button class = "btn btn-success" [disabled]="isAuth" 
         (click) = "onAllumer()">Tout allumer</button>
+        <button class ="btn btn-danger" [disabled]="isAuth" 
+        (click) = "onEteindre()" >Tout éteindre</button>
       </div>
       </div>
     </div>
