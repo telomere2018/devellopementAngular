@@ -6,11 +6,13 @@ import { MenuComponent } from './menu/menu.component';
 import { AppareilComponent } from './appareil/appareil.component';
 import { FormsModule } from '@angular/forms';
 import { appareilService } from './services/appareil.service';
+import { AuthComponent } from './auth/auth.component';
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    AppareilComponent
+    AppareilComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
