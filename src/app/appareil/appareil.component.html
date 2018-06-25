@@ -3,7 +3,11 @@
                  'list-group-item-success' : appareilStatus === 'allumé',
                   'list-group-item-danger' : appareilStatus === 'éteint' }">
 
-      <h4 [ngStyle] = "{color : getColor()}" >Appareil : {{ appareilName }} -- Statut : {{ getStatus() }}</h4>
+      <h4 [ngStyle] = "{color : getColor()}" >
+        Appareil : {{ appareilName }}
+         -- Statut : {{ getStatus() }}</h4>
+       <a [routerLink]="id">Détails</a>  
+         
       <div
       style = " width : 20px; height : 20px; background-color : red;" 
      ></div>

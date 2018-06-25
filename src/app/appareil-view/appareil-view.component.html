@@ -1,0 +1,23 @@
+<div class="col-xs-12">
+    <h2>Mes appareils</h2>
+    <ul class="list-group">
+        
+      <!--atention pour un string litéral "'maChaine'"
+      pour un nom de variable "maVariable"-->
+      <p>dernière mis à jour {{ lastUpdate | async | date :short }}</p>
+     <app-appareil *ngFor = "let appareil of appareils; let i = index"
+     
+      [appareilName] ="appareil.name" 
+      [appareilStatus] ="appareil.status"
+       [index] = "i" 
+        [id] = "appareil.id" 
+
+        ></app-appareil>
+    
+     
+    </ul>
+    <button class = "btn btn-success" [disabled] = "isAuth" 
+    (click) = "onAllume()">Tout allumer</button>
+    <button class ="btn btn-danger" [disabled] = "isAuth" 
+    (click) = "onEteind()" >Tout éteindre</button>
+  </div>
