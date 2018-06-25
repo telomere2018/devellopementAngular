@@ -14,7 +14,7 @@ authStatus: boolean;
 
   ngOnInit() {
     this.authStatus = this.authService.isAuth;
-  this.router.navigate(['appareils']);
+ 
   }
 onSignIn(){
   this.authService.signIn().then(

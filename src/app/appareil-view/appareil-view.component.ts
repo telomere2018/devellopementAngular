@@ -1,52 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { appareilService } from '../services/appareil.service';
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
   selector: 'app-appareil-view',
   templateUrl: './appareil-view.component.html',
   styleUrls: ['./appareil-view.component.scss']
 })
-export class AppareilViewComponent implements OnInit {
+export class AppareilViewComponent implements OnInit, OnDestroy {
 
-  isAuth = true;
- /*lastUpdate =
- new Promise((resolve, reject) => {
+  appareils: any[];
+  appareilSubscription: Subscription;
+
+  lastUpdate = new Promise((resolve, reject) => {
     const date = new Date();
     setTimeout(
-      () => { resolve(date);
+      () => {
+        resolve(date);
       }, 2000
     );
-  });*/
-  appareils : any[];
+  });
 
-  ngOnInit(){
-    this.appareils = this.appareilService.appareils;
-        }
-  constructor(private appareilService : appareilService) {
-    this.isAuth = false;
-  /*  setTimeout(
-      () => {
-        this.isAuth = false;
-        alert("test timeout");
-      }, 4000
-    );*/
+  constructor(private appareilService: appareilService) { }
+
+  ngOnInit() {
+    this.appareilSubscription = this.appareilService.appareilsSubject.subscribe(
+      (appareils: any[]) => {
+        this.appareils = appareils;
+      }
+    );
+    this.appareilService.emitAppareilSubject();
   }
-  onAllumer(i) {
-    
-    this.appareilService.switchOnOne(i);
-  }
-  onEteindre(i) {
-    if(confirm('Etes vous sur de vouloir éteindre tous vos appareils ?')){
-      this.appareilService.switchOffOne(i);
-    }else {
-     return  null; 
-    }
-    
-  }
-  onAllume() {
+
+  onAllumer() {
     this.appareilService.switchOnAll();
   }
-  onEteind(){
-    this.appareilService.switchOffAll();
+
+  onEteindre() {
+    if(confirm('Etes-vous sûr de vouloir éteindre tous vos appareils ?')) {
+      this.appareilService.switchOffAll();
+    } else {
+      return null;
+    }
+  }
+
+  ngOnDestroy() {
+    this.appareilSubscription.unsubscribe();
   }
 
 }
