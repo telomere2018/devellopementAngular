@@ -4,15 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
-var book = require('./routes/routeTelomere.js');
+var route = require('./routes/routeTelomere.js');
 var app = express();
+var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://localhost/testForAuth', { useMongoClient: true, promiseLibrary: require('bluebird') })
+  .then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err));
+  mongoose.set('debug', true);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
-app.use(express.static(path.join(__dirname, 'dist')));
-app.use('/books', express.static(path.join(__dirname, 'dist')));
-app.use('/', book);
+app.use(express.static(path.join(__dirname, '/dist/projet')));
+app.use('/accueil', express.static(path.join(__dirname, '/dist/projet')));
+app.use('/route', route);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
