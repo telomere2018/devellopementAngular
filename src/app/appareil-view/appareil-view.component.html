@@ -1,5 +1,5 @@
 <div class="col-xs-12">
-    <h2>Mes appareils</h2>
+    <h2>Listing population</h2>
     <ul class="list-group">
         
       <!--atention pour un string litéral "'maChaine'"
@@ -17,14 +17,14 @@
      
     </ul>
     <button class = "btn btn-success" [disabled] = "isAuth" 
-    (click) = "onAllume()">Tout allumer</button>
+    (click) = "onAllume()">Tout activer</button>
     <button class ="btn btn-danger" [disabled] = "isAuth" 
-    (click) = "onEteind()" >Tout éteindre</button>
+    (click) = "onEteind()" >Tout désactiver</button>
     <button class="btn btn-primary"
 
-        (click)="onSave()">Enregistrer les appareils</button>
+        (click)="onSave()">Enregistrer les status</button>
         <button class="btn btn-primary"
 
-        (click)="onFetch()">Récupérer les appareils</button>
+        (click)="onFetch()">Récupérer les status</button>
 
   </div>

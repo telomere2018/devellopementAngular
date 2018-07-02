@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { appareilService } from '../services/appareil.service';
 import { Subscription } from 'rxjs/Subscription';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-appareil-view',

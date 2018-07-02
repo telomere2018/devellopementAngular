@@ -23,7 +23,7 @@ populationSchema.methods.populationReturnForAngular = function () {
 	return {
 		id: this._id,
 		name: this.name,
-		params: this.params
+		params: this.params,
 		/*telomeres: this.telomeres.map((Telomere) => {
 			return telomere.telomereReturnForAngular();
 		})*/

@@ -10,18 +10,18 @@ export class appareilService {
 
   private  appareils =[
         { 
-          name : 'machine à laver',
+          name : 'population saine',
           status : 'éteint',
             id: 1
         },
         {
-          name : 'frigo',
+          name : 'population test',
           status : 'allumé',
           id : 2
 
         },
         {
-          name : 'ordinateur',
+          name : 'population infectée',
           status : 'allumé',
           id : 3
 
@@ -44,11 +44,14 @@ export class appareilService {
           );
     }
     getAppareilsFromServer() {
+        
+
         this.httpClient
-          .get<any[]>('https://telomere2018-e88b8.firebaseio.com/appareils.json')
+          .get<any[]>('/route')
           .subscribe(
             (response) => {
               this.appareils = response;
+              console.log(response);
               this.emitAppareilSubject();
             },
             (error) => {
