@@ -2,39 +2,48 @@ import { AppareilComponent } from '../appareil/appareil.component';
 import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+
+import { TelomereAddComponent } from '../telomere-add/telomere-add.component';
 
 @Injectable()
-export class appareilService {
+export class telomereService {
 
     appareilsSubject = new Subject<any[]>();
-
-  private  appareils =[
+    
+  private  telomeres =[
         { 
-          name : 'population saine',
-          status : 'éteint',
-            id: 1
+          fileName : 'telomere1',
+          author : 'éteint',
+            year: 2018,
+            status : 'allumé',
+            id : 1
         },
         {
-          name : 'population test',
+          fileName : 'telomere2',
+          author : 'allumé',
           status : 'allumé',
+          year : 2018,
           id : 2
 
         },
         {
-          name : 'population infectée',
-          status : 'allumé',
+          fileName : 'telomere infectée',
+          author : 'allumé',
+          status : 'éteint',
+          year : 2018,
           id : 3
 
         }
   
     ]
-    constructor(private httpClient: HttpClient, private router: Router){
+    constructor(private httpClient: HttpClient){
 
     }
-    saveAppareilsToServer() {
+    saveAppareilsToServer(name: string, description: string) {
+        
+
         this.httpClient
-          .put('route', this.appareils)
+          .put('route/telomere', this.telomeres)
           .subscribe(
             () => {
               console.log('Enregistrement terminé !');
@@ -51,7 +60,7 @@ export class appareilService {
           .get<any[]>('/route')
           .subscribe(
             (response) => {
-              this.appareils = response;
+              this.telomeres = response;
               console.log(response);
               this.emitAppareilSubject();
             },
@@ -61,10 +70,10 @@ export class appareilService {
           );
     }
     emitAppareilSubject(){
-        this.appareilsSubject.next(this.appareils.slice());
+        this.appareilsSubject.next(this.telomeres.slice());
     }
     getAppareilById(id: number){
-       const appareil = this.appareils.find(
+       const appareil = this.telomeres.find(
             (s) =>{
                 return s.id === id;
             }
@@ -72,25 +81,25 @@ export class appareilService {
         return appareil;
     }
 switchOnAll() {
-    for(let appareil of this.appareils)
+    for(let appareil of this.telomeres)
     {
     appareil.status='allumé';
     }
     this.emitAppareilSubject();
 }
 switchOffAll(){
-    for(let appareil of this.appareils)
+    for(let appareil of this.telomeres)
     {
         appareil.status='éteint';
     }
     this.emitAppareilSubject();
 }
 switchOnOne(i: number){
-    this.appareils[i].status = 'allumé';
+    this.telomeres[i].status = 'allumé';
     this.emitAppareilSubject();
 }
 switchOffOne(i: number){
-    this.appareils[i].status = 'éteint';
+    this.telomeres[i].status = 'éteint';
     this.emitAppareilSubject();
 
 }
@@ -100,19 +109,21 @@ addAppareil(name: string, status: string) {
 
       id: 0,
 
-      name: '',
+      fileName: '',
 
-      status: ''
+      status: '',
+      author: '',
+      year : 0
 
     };
 
-    appareilObject.name = name;
+    appareilObject.fileName = name;
 
     appareilObject.status = status;
 
-    appareilObject.id = this.appareils[(this.appareils.length - 1)].id + 1;
+    appareilObject.id = this.telomeres[(this.telomeres.length - 1)].id + 1;
 
-    this.appareils.push(appareilObject);
+    this.telomeres.push(appareilObject);
 
     this.emitAppareilSubject();
 
@@ -120,5 +131,4 @@ addAppareil(name: string, status: string) {
 ngOnInit(){
    
 }
-
 }

@@ -12,9 +12,9 @@ export class EditAppareilComponentComponent implements OnInit {
 
   
   defaultOnOff = 'éteint';
-  appareilService : appareilService;
-  router : Router; 
-  constructor( appareilService: appareilService, router: Router) {
+ 
+ 
+  constructor(private appareilService: appareilService,private router: Router) {
     this.router = router;
     this.appareilService = appareilService;
    }

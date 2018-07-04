@@ -36,6 +36,13 @@ router.post('/', function(req, res, next) {
     res.json(post);
   });
 });
+/* SAVE individual*/
+router.post('/telomere', function(req, res, next) {
+  Telomere.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 
 /* UPDATE population */
 router.put('/:id', function(req, res, next) {

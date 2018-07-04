@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/interval';
+import { interval } from 'rxjs';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   counterSubscription: Subscription;
 
   ngOnInit() {
-    const counter = Observable.interval(1000);
+    const counter = interval(1000);
     this.counterSubscription = counter.subscribe(
       (value) => {
         this.secondes = value;

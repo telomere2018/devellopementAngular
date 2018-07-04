@@ -19,6 +19,7 @@ import { EditAppareilComponentComponent } from './edit-appareil-component/edit-a
 import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './services/user.service';
 import { NewUserComponent } from './new-user/new-user.component';
+import { TelomereAddComponent } from './telomere-add/telomere-add.component';
 
 
 const appRoutes: Routes = [
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
   { path: 'edit', canActivate: [AuthGuard], component: EditAppareilComponentComponent },
   { path: 'users', canActivate: [AuthGuard], component: UserListComponent},
   { path: 'user', component: NewUserComponent },
+  { path: 'telomere-add', canActivate: [AuthGuard], component: TelomereAddComponent},
   { path: '',canActivate: [AuthGuard], component: AppareilViewComponent },
   { path: '**', component: FourOhFourComponent }
   
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
     FourOhFourComponent,
     EditAppareilComponentComponent,
     UserListComponent,
-    NewUserComponent
+    NewUserComponent,
+    TelomereAddComponent
   ],
   imports: [
     BrowserModule,
