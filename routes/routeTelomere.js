@@ -30,14 +30,14 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* SAVE Population */
-router.post('/', function(req, res, next) {
+router.post('/population', function(req, res, next) {
   Population.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 /* SAVE individual*/
-router.post('/telomere', function(req, res, next) {
+router.post('/sample', function(req, res, next) {
   Telomere.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

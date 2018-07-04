@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { telomereService } from '../services/telomere.service';
+
+
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-telomere-add',
   templateUrl: './telomere-add.component.html',
@@ -9,22 +12,25 @@ import { telomereService } from '../services/telomere.service';
 })
 export class TelomereAddComponent implements OnInit {
 
-  constructor(private router: Router, private telomereService: telomereService) { }
+  constructor(private http:HttpClient, private router: Router, private telomereService: telomereService) { }
+
+  telomere = {};
+
+ 
 
   ngOnInit() {
   }
-  onSubmit(form: NgForm) {
 
-    const name = form.value['name'];
-
-    const status = form.value['status'];
-
-   this.telomereService.saveAppareilsToServer(name, status);
-
-    this.router.navigate(['/appareils']);
-
-
-}
+  saveSample() {
+    this.http.post('/route/sample', this.telomere)
+      .subscribe(res => {
+          let id = res['_id'];
+          this.router.navigate(['/appareils', id]);
+        }, (err) => {
+          console.log(err);
+        }
+      );
+  }
 
 }
 

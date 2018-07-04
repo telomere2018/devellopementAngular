@@ -20,7 +20,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './services/user.service';
 import { NewUserComponent } from './new-user/new-user.component';
 import { TelomereAddComponent } from './telomere-add/telomere-add.component';
-
+import { telomereService } from './services/telomere.service';
 
 const appRoutes: Routes = [
   { path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent },
@@ -59,7 +59,8 @@ const appRoutes: Routes = [
     appareilService,
     AuthService,
     AuthGuard,
-    UserService
+    UserService,
+    telomereService
 
 
   ],
