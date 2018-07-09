@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
 var teloSchema = new mongoose.Schema({
-	name : String,
+	author : String,
 	params : [String],
 	date : { type : Date, default: Date.now },
-	description: String,
+	year : Number,
+	organisme : String,
 	fileName : String,
+	
 	populations: [
 		{
 			type : mongoose.Schema.Types.ObjectId,

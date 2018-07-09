@@ -21,8 +21,13 @@ import { UserService } from './services/user.service';
 import { NewUserComponent } from './new-user/new-user.component';
 import { TelomereAddComponent } from './telomere-add/telomere-add.component';
 import { telomereService } from './services/telomere.service';
-
+import { InputFileModule } from 'ngx-input-file';
+import { InputFileComponent } from './input-file/input-file.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
+import { FileSelectDirective } from 'ng2-file-upload';
 const appRoutes: Routes = [
+  { path: 'upload', canActivate: [AuthGuard], component: UploadFileComponent },
+  { path: 'input-file', canActivate: [AuthGuard], component: InputFileComponent },
   { path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent },
   { path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent },
   { path: 'auth', component: AuthComponent },
@@ -46,14 +51,18 @@ const appRoutes: Routes = [
     EditAppareilComponentComponent,
     UserListComponent,
     NewUserComponent,
-    TelomereAddComponent
+    TelomereAddComponent,
+    InputFileComponent,
+    UploadFileComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
     FormsModule ,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes) 
+    RouterModule.forRoot(appRoutes),
+    InputFileModule 
   ],
   providers: [
     appareilService,

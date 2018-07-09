@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row mt-5">
+      <div class="col-6 m-auto">
+          <input-file 
+              inputId="images" 
+              inputMaxFiles="4" 
+              [(model)]="inputFileModel"
+              (acceptedFile)="onAccept($event)"
+              (removedFile)="onRemove($event)">
+          </input-file> 
+      </div>
+  </div>
+  </div>
+<br>
+  <div class="row mt-5">
+      <div class="col-6 m-auto">
+          <input-file 
+              inputId="images-minimal" 
+              minimal="true"
+              [(model)]="inputFileMinimalModel"
+              (acceptedFile)="onAccept($event)">
+          </input-file> 
+      </div>
+  </div>
+
+<br>
+<div class="row mt-5">
+  <div class="col-6 m-auto">
+<input-file 
+    inputId="images" 
+    inputAccept=".docx,.pdf,.txt,image/*"
+    [disableUpload]="true"
+    inputMaxFiles="4" 
+    [(model)]="inputFileModel"
+    [textBrowse]="Rechercher"
+    [textFileSelected]="'COMMON.FORM.FILES.SELECTED' "
+    [textNoFile]="'no file selected' "
+    [textRemove]="'COMMON.REMOVE' "
+    (acceptedFile)="onAccept($event)"
+    (removedFile)="onRemoveImage($event)">
+</input-file> 
+  </div>
+</div>
