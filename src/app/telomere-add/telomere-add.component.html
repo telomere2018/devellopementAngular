@@ -18,36 +18,44 @@
         </div>
         <div class="form-group">
           <label for="name">Organisme</label>
-          <input type="text" class="form-control" [(ngModel)]="telomere.organisme" name="organisme" required>
+          <input type="text" class="form-control" [(ngModel)]="telomere.organisme"
+          formControlName="name"  name="organisme" 
+          required>
         </div>
         <input type="file" id="file" name="file" 
         [(ngModel)]="telomere.file" class="btn btn-default btn-file" 
         (change)="onEvent($event)"/><br>
+
+        <input type="file" name="file" ng2FileSelect [uploader]="uploader"
+        (change)="onEvent($event)" /><br>
       
     
       <input type="reset" value="réinitialisé"/>
      
         
         <div class="form-group">
+            <button type="button" (click)="onUpload()" [disabled]="!f.form.valid">upload</button>
           <button type="submit" class="btn btn-success" [disabled]="!f.form.valid">Save</button>
         </div>
       </form>
     </div>
   </div>
 </div>
+
 <div class="form-group">
   <label for="file"> fichier texte </label>
   
 
   <!-- File input for the file-upload plugin, with special ng2-file-upload directive called ng2FileSelect -->
-  <input type="file" name="file" ng2FileSelect [uploader]="uploader" (change)="onEvent(event)" /><br>
+  <input type="file" name="file" ng2FileSelect [uploader]="uploader"
+   (change)="onEvent($event)" /><br>
   <!-- button to trigger the file upload when submitted -->
   <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
         Upload with ng-2 file uploader
   </button>
   <button type="button" (click)="remplir()" >remplir les champs</button>
   <button type="button" (click)="onEvent(e)" >change</button>
-  <button type="button" (click)="onUpload()" >upload</button>
+ 
 </div> 
 
         

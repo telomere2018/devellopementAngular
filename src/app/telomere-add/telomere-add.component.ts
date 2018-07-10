@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef , Input, Output} from '@angular/core';
+import { ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import {  FileUploader } from 'ng2-file-upload/ng2-file-upload';
@@ -15,31 +17,51 @@ const URL = "http//localhost:3001/uploads"
 
 
 export class TelomereAddComponent implements OnInit {
-  @Input() fileName: string ;
+  form: FormGroup;
+  loading: boolean = false;
+  @Input() fileName: string ="";
+  @Input() organisme: string ="";
   public uploader:FileUploader = new FileUploader({url: URL, itemAlias: 'file'});
+  @ViewChild('fileInput') fileInput: ElementRef;
   //This is the default title property created by the angular cli. Its responsible for the app works
   constructor(private http:HttpClient, private router: Router,
      private telomereService: telomereService,
-     private el: ElementRef) { }
+     private fb: FormBuilder,
+     private el: ElementRef) { 
+      this.createForm();
+     }
+     createForm() {
+      this.form = this.fb.group({
+        name: ['', Validators.required],
+        file: null
+      });
+    }
+    telomere = {}
 
-  @Input() telomere = {
-  fileName: ""
-  };
   selectorFile : File = null;
 
   onEvent(event){
 
   
-   this.selectorFile = <File>event.target.files[0];
+  this.selectorFile = <File>event.target.files[0];
    
   this.fileName=this.selectorFile.name;
- 
-   let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
-  alert( 'input element ' + inputEl.files[0]);
-  alert('inputElement' + inputEl);
+  this.form.get('file').setValue(this.selectorFile);
+  // let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
+  //alert( 'input element ' + inputEl.files[0]);
+  //alert('inputElement' + inputEl);
  }
 
-
+ private prepareSave(): any {
+  let input = new FormData();
+  input.append('name', this.form.get('name').value);
+  input.append('file', this.form.get('file').value);
+  return input;
+}
+clearFile() {
+  this.form.get('file').setValue(null);
+  this.fileInput.nativeElement.value = '';
+}
   ngOnInit() {
      //override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
      this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
@@ -54,8 +76,10 @@ onUpload(){
 alert('onupload' + this.selectorFile.name);
   let fd = new FormData();
   fd.append('file',this.selectorFile, this.selectorFile.name);
+  fd.append('organisme', this.organisme);
   this.http.post('/route/sample/file',fd)
       .subscribe(res => {
+        console.log(res);
           let id = res['_id'];
           this.router.navigate(['/appareils']);
         }, (err) => {

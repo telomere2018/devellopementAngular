@@ -66,8 +66,53 @@ router.post('/', function (req, res, next) {
 });
 router.post('/sample/file',(req,res) => {
 
-console.log('dans le router  ' + req.name );
+console.log('dans le router  ' , req.file.originalname );
 res.json("une reponse du serveur");
+new Promise((resolve,reject) => {
+	if(req.params.id){console.log(req.params);
+    Telomere.findById(req.params.id).then(resolve, reject);
+    console.log("avec ID");
+	}else{   
+    resolve(new Telomere());
+    
+	}
+    
+	}).then(telomere => {
+
+        
+        
+        Telomere.find({"name": req.body.fileName}).count().then(how=>{
+           // console.log("find filenames  " + req.body.fileName + " ? " + how);
+            if(how!=0){
+                console.log(" exist \n");
+                res.redirect('/exist');
+            }
+        }); 
+    telomere.fileName = req.file.fileName;
+    telomere.originaleName = req.file.originalname;
+	  telomere.organisme = req.organisme;
+   /* telomere.params = req.params.params;
+    
+    telomere.author = req.author;
+    telomere.year = req.year;*/
+       
+        console.log( "******c'est le body   --->" , req.body);
+        console.log("req.body.file ---->       " , req.body.file);
+	if(req.file) {
+    console.log(req.file.fileName + 'file');
+        telomere.fileName = req.file.filename;
+       
+    };
+
+  return telomere.save();
+  
+	}).then((post) => {
+
+    res.json(post);
+	}), err => console.log(err);
+
+
+
 	});
 router.post('/sample/:id?',(req,res) => {
     
@@ -101,6 +146,7 @@ router.post('/sample/:id?',(req,res) => {
     telomere.date = req.body.date;
     telomere.author = req.body.author;
     telomere.year = req.body.year;
+       
         console.log( "******c'est le body   --->" , req.body);
         console.log("req.body.file ---->       " , req.body.file);
 	if(req.file) {
