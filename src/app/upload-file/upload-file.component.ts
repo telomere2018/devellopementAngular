@@ -13,7 +13,7 @@ export class UploadFileComponent implements OnInit {
   constructor() { }
 
   //This is the default title property created by the angular cli. Its responsible for the app works 
-  title = 'app works!';
+  title = 'upload files !';
 
   ngOnInit() {
     

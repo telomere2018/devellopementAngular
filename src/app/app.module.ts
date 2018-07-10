@@ -25,6 +25,8 @@ import { InputFileModule } from 'ngx-input-file';
 import { InputFileComponent } from './input-file/input-file.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { UploadHttpComponent } from './upload-http/upload-http.component';
+
 const appRoutes: Routes = [
   { path: 'upload', canActivate: [AuthGuard], component: UploadFileComponent },
   { path: 'input-file', canActivate: [AuthGuard], component: InputFileComponent },
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     TelomereAddComponent,
     InputFileComponent,
     UploadFileComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    UploadHttpComponent
   ],
   imports: [
     BrowserModule,

@@ -50,7 +50,7 @@ router.post('/population', function(req, res, next) {
 router.post('/', function (req, res, next) {
   console.log('dans le post' , req);
   var path = '';
- 
+ console.log('voici la requête' + req.file.originalname);
  /* upload(req, res, function (err) {
     console.log('dans upload');
      if (err) {
