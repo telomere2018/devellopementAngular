@@ -19,8 +19,8 @@ const URL = "http//localhost:3001/uploads"
 export class TelomereAddComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
-  @Input() fileName: string ="";
-  @Input() organisme: string ="";
+  @Input() fileName: string ;
+  @Input() organisme: string;
   public uploader:FileUploader = new FileUploader({url: URL, itemAlias: 'file'});
   @ViewChild('fileInput') fileInput: ElementRef;
   //This is the default title property created by the angular cli. Its responsible for the app works
@@ -28,14 +28,9 @@ export class TelomereAddComponent implements OnInit {
      private telomereService: telomereService,
      private fb: FormBuilder,
      private el: ElementRef) { 
-      this.createForm();
+      
      }
-     createForm() {
-      this.form = this.fb.group({
-        name: ['', Validators.required],
-        file: null
-      });
-    }
+    
     telomere = {}
 
   selectorFile : File = null;
@@ -44,20 +39,15 @@ export class TelomereAddComponent implements OnInit {
 
   
   this.selectorFile = <File>event.target.files[0];
-   
+  
   this.fileName=this.selectorFile.name;
-  this.form.get('file').setValue(this.selectorFile);
+  
   // let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
   //alert( 'input element ' + inputEl.files[0]);
   //alert('inputElement' + inputEl);
  }
 
- private prepareSave(): any {
-  let input = new FormData();
-  input.append('name', this.form.get('name').value);
-  input.append('file', this.form.get('file').value);
-  return input;
-}
+ 
 clearFile() {
   this.form.get('file').setValue(null);
   this.fileInput.nativeElement.value = '';
@@ -73,9 +63,10 @@ clearFile() {
 }
 
 onUpload(){
-alert('onupload' + this.selectorFile.name);
+alert('onupload ' + this.selectorFile.name);
   let fd = new FormData();
-  fd.append('file',this.selectorFile, this.selectorFile.name);
+  fd.append('file',this.selectorFile);
+  alert('this.organisme' + this.organisme)
   fd.append('organisme', this.organisme);
   this.http.post('/route/sample/file',fd)
       .subscribe(res => {

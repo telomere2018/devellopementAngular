@@ -90,7 +90,9 @@ new Promise((resolve,reject) => {
         }); 
     telomere.fileName = req.file.fileName;
     telomere.originaleName = req.file.originalname;
-	  telomere.organisme = req.organisme;
+    telomere.organisme = req.body.organisme;
+    
+    console.log(req.organisme);
    /* telomere.params = req.params.params;
     
     telomere.author = req.author;

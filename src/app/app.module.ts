@@ -26,8 +26,10 @@ import { InputFileComponent } from './input-file/input-file.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { UploadHttpComponent } from './upload-http/upload-http.component';
+import { AddSampleComponent } from './add-sample/add-sample.component';
 
 const appRoutes: Routes = [
+  { path: 'add-sample', canActivate: [AuthGuard], component: AddSampleComponent },
   { path: 'upload', canActivate: [AuthGuard], component: UploadFileComponent },
   { path: 'input-file', canActivate: [AuthGuard], component: InputFileComponent },
   { path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent },
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     InputFileComponent,
     UploadFileComponent,
     FileSelectDirective,
-    UploadHttpComponent
+    UploadHttpComponent,
+    AddSampleComponent
   ],
   imports: [
     BrowserModule,

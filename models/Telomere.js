@@ -6,6 +6,7 @@ var teloSchema = new mongoose.Schema({
 	year : Number,
 	organisme : String,
 	fileName : String,
+	originaleName: String,
 	
 	populations: [
 		{
