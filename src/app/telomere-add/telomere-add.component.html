@@ -5,16 +5,16 @@
       <form id="form"  (ngSubmit)="saveSample()" #f="ngForm" enctype="multipart/form-data">
         <div class="form-group">
           <label for="name">fileName</label>
-          <input type="text" class="form-control" [(ngModel)]="telomere.fileName" 
+          <input type="text" class="form-control" [(ngModel)]="fileName" 
           value="{{ fileName }}" name="fileName" required>
         </div>
         <div class="form-group">
           <label for="name">author</label>
-          <input type="text" class="form-control" [(ngModel)]="telomere.author" name="author" required>
+          <input type="text" class="form-control" [(ngModel)]="author" name="author" required>
         </div>
         <div class="form-group">
           <label for="name">Year</label>
-          <input type="text" class="form-control" [(ngModel)]="telomere.year" name="year" required>
+          <input type="text" class="form-control" [(ngModel)]="year" name="year" required>
         </div>
         <div class="form-group">
           <label for="name">Organisme</label>
@@ -22,40 +22,41 @@
             name="organisme" id="organisme"
           required>
         </div>
+        <div class="form-group">
         <input type="file" id="file" name="file" 
         [(ngModel)]="telomere.file" class="btn btn-default btn-file" 
         (change)="onEvent($event)"/><br>
-
-        <input type="file" name="file" ng2FileSelect [uploader]="uploader"
-        (change)="onEvent($event)" /><br>
+      </div>
+       <!-- <input type="file" name="file" ng2FileSelect [uploader]="uploader"
+        (change)="onEvent($event)" required/><br>-->
       
     
       <input type="reset" value="réinitialisé"/>
      
         
         <div class="form-group">
-            <button type="button" (click)="onUpload()" [disabled]="!f.form.valid">upload</button>
-          <button type="submit" class="btn btn-success" [disabled]="!f.form.valid">Save</button>
+            <label for="name">Button for validate the form</label><br>
+            <button type="button" class="btn btn-success" (click)="onUpload()" 
+            (change)="onEvent" [disabled]="!f.form.valid" >upload file and save parameters</button>
+        
         </div>
       </form>
     </div>
   </div>
 </div>
 
-<div class="form-group">
-  <label for="file"> fichier texte </label>
+
   
 
   <!-- File input for the file-upload plugin, with special ng2-file-upload directive called ng2FileSelect -->
-  <input type="file" name="file" ng2FileSelect [uploader]="uploader"
-   (change)="onEvent($event)" /><br>
+  <!--<input type="file" name="file" ng2FileSelect [uploader]="uploader"
+   (change)="onEvent($event)" /><br>-->
   <!-- button to trigger the file upload when submitted -->
-  <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+  <!--<button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
         Upload with ng-2 file uploader
-  </button>
-  <button type="button" (click)="remplir()" >remplir les champs</button>
-  <button type="button" (click)="onEvent(e)" >change</button>
+  </button>-->
  
-</div> 
+ 
+
 
         

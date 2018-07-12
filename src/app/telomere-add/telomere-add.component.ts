@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import {  FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { telomereService } from '../services/telomere.service';
-
+import { readFileService } from '../services/read-file.service';
 
 import { HttpClient } from '@angular/common/http';
 const URL = "http//localhost:3001/uploads"
@@ -27,7 +27,8 @@ export class TelomereAddComponent implements OnInit {
   constructor(private http:HttpClient, private router: Router,
      private telomereService: telomereService,
      private fb: FormBuilder,
-     private el: ElementRef) { 
+     private el: ElementRef,
+     private readFile: readFileService) { 
       
      }
     
@@ -41,11 +42,14 @@ export class TelomereAddComponent implements OnInit {
   this.selectorFile = <File>event.target.files[0];
   
   this.fileName=this.selectorFile.name;
-  
+  console.log('file ' ,this.selectorFile);
   // let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
-  //alert( 'input element ' + inputEl.files[0]);
-  //alert('inputElement' + inputEl);
- }
+  
+  //nombre is the number of lines
+  let nombre: number = 20;
+  this.readFile.readOneFile(this.selectorFile, nombre);
+   
+  };
 
  
 clearFile() {

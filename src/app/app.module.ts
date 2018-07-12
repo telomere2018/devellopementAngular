@@ -27,7 +27,7 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { UploadHttpComponent } from './upload-http/upload-http.component';
 import { AddSampleComponent } from './add-sample/add-sample.component';
-
+import { readFileService } from './services/read-file.service';
 const appRoutes: Routes = [
   { path: 'add-sample', canActivate: [AuthGuard], component: AddSampleComponent },
   { path: 'upload', canActivate: [AuthGuard], component: UploadFileComponent },
@@ -75,7 +75,8 @@ const appRoutes: Routes = [
     AuthService,
     AuthGuard,
     UserService,
-    telomereService
+    telomereService,
+    readFileService
 
 
   ],
