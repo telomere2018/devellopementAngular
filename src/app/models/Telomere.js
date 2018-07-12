@@ -5,6 +5,10 @@ var teloSchema = new mongoose.Schema({
 	date : { type : Date, default: Date.now },
 	description: String,
 	fileName : String,
+	protocole : String,
+	date_edition : String,
+	nbCells : number,
+	
 	populations: [
 		{
 			type : mongoose.Schema.Types.ObjectId,

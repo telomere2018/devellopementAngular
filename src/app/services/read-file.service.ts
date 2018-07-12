@@ -19,25 +19,33 @@ export class readFileService {
     readOneFile(file: File, nombre: number) {
         let reader = new FileReader();
         reader.readAsText(file);
-       var text;
-       // ici une fonction anonyme
-        reader.onload = () => {
+        var result;
+        // ici une fonction anonyme
+       result = reader.onload = () => {
             // this 'text' is the content of the file typeof === string
-            text = reader.result;
-
-            var tab = [];
-            var count: number = 0;
-
-            var re = /\s+/;
-
-            tab = text.split(re);
- 
-            for (let j = 0; j < nombre; j++) {
-                console.log("tab" + j + "\n montab[" + j + "] \n" + tab[j]);
-            }
+           // var text;
+           
+           
+                 var text = reader.result;
 
 
+
+                var tab = [];
+                var count: number = 0;
+
+                var re = /\s+/;
+
+                tab = text.split(re);
+
+                for (let j = 0; j < nombre; j++) {
+                    console.log("tab" + j + "\n montab[" + j + "] \n" + tab[j]);
+                }
+         return tab;
+                        
         }
+        console.log('result' + typeof(result) + '   '+ result);
+       let res=result();
+       console.log('res' + res);
     }
 
 

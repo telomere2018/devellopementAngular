@@ -91,8 +91,9 @@ router.post('/sample/file', (req, res) => {
       }
     });
     telomere.fileName = req.file.fileName;
-    telomere.originaleName = req.file.originalname;
+    telomere.name = req.file.originalname;
     telomere.organisme = req.body.organisme;
+    telomere.date_edition = req.body.date_edition;
 
     console.log(req.organisme);
     /* telomere.params = req.params.params;
@@ -113,12 +114,10 @@ router.post('/sample/file', (req, res) => {
   }).then((post) => {
 
     res.json(post);
-  }), err => console.log(err);
+  }).catch( err => console.log(err));
 
 
 
-}).catch(err => {
-  console.log(err);
 });
 router.post('/sample/:id?', (req, res) => {
 
