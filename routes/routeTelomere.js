@@ -67,8 +67,6 @@ router.post('/', function (req, res, next) {
 });
 router.post('/sample/file', (req, res) => {
 
-  console.log('dans le router  ', req.file.originalname);
-  res.json("une reponse du serveur");
   new Promise((resolve, reject) => {
     if (req.params.id) {
       console.log(req.params);
@@ -78,19 +76,21 @@ router.post('/sample/file', (req, res) => {
       resolve(new Telomere());
 
     }
-
+    res.json("une reponse du serveur    ");
   }).then(telomere => {
 
 
 
-    Telomere.find({ "name": req.body.fileName }).count().then(how => {
+    Telomere.find({ "originalename": req.body.originalname }).count().then(how => {
       // console.log("find filenames  " + req.body.fileName + " ? " + how);
       if (how != 0) {
-        console.log(" exist \n");
-        res.redirect('/exist');
+      console.log(" ce fichier existe déjà en base ");
+       
+      
       }
     });
-    telomere.fileName = req.file.fileName;
+
+    telomere.fileName = req.file.filename;
     telomere.originalname = req.file.originalname;
     telomere.organisme = req.body.organisme;
     telomere.nbCells = req.body.nbCells;
@@ -98,35 +98,12 @@ router.post('/sample/file', (req, res) => {
     telomere.date_edition = req.body.date_edition;
     telomere.protocole = req.body.protocole;
 
-    console.log(req.organisme);
-    /* telomere.params = req.params.params;
-
-     telomere.author = req.author;
-     telomere.year = req.year;*/
-
-    console.log("******c'est le body   --->", req.body);
-    console.log("req.body.file ---->       ", req.body.file);
-    if (req.file) {
-      console.log(req.file.fileName + 'file');
-      telomere.fileName = req.file.filename;
-
-    };
 
     return telomere.save();
 
-  }).then((post) => {
-
-    res.json(post);
-  }).catch( err => console.log(err));
-
-
-
+  }),err => console.log(err);
 });
 router.post('/sample/:id?', (req, res) => {
-
-
-
-
 
   new Promise((resolve, reject) => {
     if (req.params.id) {
@@ -156,14 +133,6 @@ router.post('/sample/:id?', (req, res) => {
     telomere.author = req.body.author;
     telomere.date_edition = req.body.date_edition;
     telomere.protocole = req.body.protocole;
-
-    console.log("******c'est le body   --->", req.body);
-    console.log("req.body.file ---->       ", req.body.file);
-    if (req.file) {
-      console.log(req.file.fileName + 'file');
-      telomere.fileName = req.file.filename;
-
-    };
 
     return telomere.save();
 
