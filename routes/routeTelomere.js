@@ -58,11 +58,11 @@ router.post('/', function (req, res, next) {
         // An error occurred when uploading
         console.log('dans error ' + err);
         return res.status(422).send("an Error occured");
-      }  
+      }
      // No error occured.
       path = req.file.path;
       console.log('avant send ' + err);
-      return res.send("Upload Completed for " + path); 
+      return res.send("Upload Completed for " + path);
      });  */
 });
 router.post('/sample/file', (req, res) => {
@@ -91,13 +91,16 @@ router.post('/sample/file', (req, res) => {
       }
     });
     telomere.fileName = req.file.fileName;
-    telomere.name = req.file.originalname;
+    telomere.originalname = req.file.originalname;
     telomere.organisme = req.body.organisme;
+    telomere.nbCells = req.body.nbCells;
+    telomere.author = req.body.author;
     telomere.date_edition = req.body.date_edition;
+    telomere.protocole = req.body.protocole;
 
     console.log(req.organisme);
     /* telomere.params = req.params.params;
-     
+
      telomere.author = req.author;
      telomere.year = req.year;*/
 
@@ -146,12 +149,13 @@ router.post('/sample/:id?', (req, res) => {
         res.redirect('/exist');
       }
     });
-    telomere.fileName = req.body.fileName;
+    telomere.fileName = req.file.fileName;
+    telomere.originalname = req.body.originalname;
     telomere.organisme = req.body.organisme;
-    telomere.params = req.body.params;
-    telomere.date = req.body.date;
+    telomere.nbCells = req.body.nbCells;
     telomere.author = req.body.author;
-    telomere.year = req.body.year;
+    telomere.date_edition = req.body.date_edition;
+    telomere.protocole = req.body.protocole;
 
     console.log("******c'est le body   --->", req.body);
     console.log("req.body.file ---->       ", req.body.file);

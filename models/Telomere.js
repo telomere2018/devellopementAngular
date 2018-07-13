@@ -3,11 +3,13 @@ var teloSchema = new mongoose.Schema({
 	author : String,
 	params : [String],
 	date : { type : Date, default: Date.now },
-	year : Number,
 	organisme : String,
 	fileName : String,
-	originaleName: String,
-	
+	originalname: String,
+	protocole: String,
+	date_edition: String,
+	nbCells: String,
+
 	populations: [
 		{
 			type : mongoose.Schema.Types.ObjectId,

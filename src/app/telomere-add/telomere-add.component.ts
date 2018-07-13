@@ -19,11 +19,12 @@ const URL = "http//localhost:3001/uploads"
 export class TelomereAddComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
-  @Input() fileName: string;
+  @Input() originalname: string;
   @Input() organisme: string;
   @Input() date_edition: string;
   @Input() nbCells: string;
   @Input() protocole: string;
+  @Input() author: string;
 
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'file' });
   @ViewChild('fileInput') fileInput: ElementRef;
@@ -45,7 +46,7 @@ export class TelomereAddComponent implements OnInit {
 
     this.selectorFile = <File>event.target.files[0];
 
-    this.fileName = this.selectorFile.name;
+    this.originalname = this.selectorFile.name;
     console.log('file ', this.selectorFile);
     // let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
 
@@ -57,7 +58,7 @@ export class TelomereAddComponent implements OnInit {
     result = reader.onload = () => {
       // this 'text' is the content of the file typeof === string
       // var text;
-
+      console.log( 'this' , this);
 
       var text = reader.result;
 
@@ -79,7 +80,7 @@ export class TelomereAddComponent implements OnInit {
       console.log(' tab ' + tab);
       this.nbCells = tab[12];
       this.date_edition = tab[15];
-      this.protocole = tab[5];
+      this.protocole = tab[4];
 
     }
 
@@ -102,14 +103,18 @@ export class TelomereAddComponent implements OnInit {
   }
 
   onUpload() {
-    alert('onupload ' + this.selectorFile.name);
+    
     let fd = new FormData();
     fd.append('file', this.selectorFile);
-    alert('this.organisme' + this.organisme)
     fd.append('organisme', this.organisme);
     fd.append('protocole', this.protocole);
     fd.append('date_edition', this.date_edition);
     fd.append('nbCells', this.nbCells);
+    fd.append('author', this.author);
+
+    console.log(this.protocole +' ' + this.author + 'this.author');
+    alert(this.protocole +' ' + this.author + 'this.author');
+
     this.http.post('/route/sample/file', fd)
       .subscribe(res => {
         console.log(res);
