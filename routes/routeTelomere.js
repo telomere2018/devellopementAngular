@@ -5,20 +5,14 @@ var population = require('../models/Population.js');
 var Telomere = require('../models/Telomere');
 
 
-/* GET ALL Polulation */
-router.get('/', function (req, res, next) {
+/* GET ALL sample */
+router.get('/sample/download', function (req, res, next) {
 
-  population.find({}).then(populations => {
-    console.log('pop' + populations);
+  Telomere.find({}).then(telomeres => {
+    console.log('telomeres' + telomeres);
+    res.json(telomeres);
   });
 
-
-
-  population.find(function (err, products) {
-    if (err) return next(err);
-    console.log('products', products);
-    res.json(products);
-  });
 });
 
 

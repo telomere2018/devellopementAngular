@@ -2,12 +2,14 @@ import { Component, OnInit, ViewEncapsulation, ElementRef, Input, Output } from 
 import { ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { telomereService } from '../services/telomere.service';
 import { readFileService } from '../services/read-file.service';
 
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
 const URL = "http//localhost:3001/uploads"
 @Component({
   selector: 'app-telomere-add',
@@ -112,8 +114,7 @@ export class TelomereAddComponent implements OnInit {
     fd.append('nbCells', this.nbCells);
     fd.append('author', this.author);
 
-    console.log(this.protocole +' ' + this.author + 'this.author');
-    alert(this.protocole +' ' + this.author + 'this.author');
+  
 
     this.http.post('/route/sample/file', fd)
       .subscribe(res => {

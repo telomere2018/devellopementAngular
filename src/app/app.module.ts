@@ -29,6 +29,9 @@ import { UploadHttpComponent } from './upload-http/upload-http.component';
 import { AddSampleComponent } from './add-sample/add-sample.component';
 import { readFileService } from './services/read-file.service';
 import { DownloadFileComponent } from './download-file/download-file.component';
+import { OneFileComponent } from './one-file/one-file.component';
+
+
 const appRoutes: Routes = [
   { path: 'add-sample', canActivate: [AuthGuard], component: AddSampleComponent },
   { path: 'download', canActivate: [AuthGuard], component: DownloadFileComponent },
@@ -63,7 +66,10 @@ const appRoutes: Routes = [
     FileSelectDirective,
     UploadHttpComponent,
     AddSampleComponent,
-    DownloadFileComponent
+    DownloadFileComponent,
+    OneFileComponent,
+    
+  
   ],
   imports: [
     BrowserModule,
