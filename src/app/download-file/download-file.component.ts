@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
+import { Telomere } from '../../../models/Telomere';
+import { TelomereAddComponent } from '../telomere-add/telomere-add.component';
 @Component({
   selector: 'app-download-file',
   templateUrl: './download-file.component.html',
@@ -17,7 +18,7 @@ export class DownloadFileComponent implements OnInit {
   constructor(private http: HttpClient
     , private router: Router) { }
 
-  samples = {};
+ telomeres : Telomere[] = [];
 
   ngOnInit() {
     this.download();
@@ -26,12 +27,12 @@ export class DownloadFileComponent implements OnInit {
   download() {
     this.http.get('/route/sample/download')
       .subscribe(res => {
-        console.log('res[0].fileName ' , res[0].fileName + " , " ,res);
-      this.samples=res;
-        console.log('sample ' , this.samples);
-        
+        console.log('Array avant res? ' + typeof(this.telomeres));     
+      this.telomeres = <Telomere[]>res;
+        console.log('sample ' , this.telomeres);
+        console.log('Array ? ' + typeof(this.telomeres));
       }, (err) => {
-        console.log('error dans le .ts', err);
+        console.log('error dans le .ts ', err);
       }
       );
   }
