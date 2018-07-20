@@ -15,8 +15,6 @@ export class nbCellsPipe {
         let g=Number(telomere.nbCells)
         
 
-
-        console.log(g<=args1);
    // return   Number(telomere.nbCells) <= args1 ;
     return g<=args1;
     });
