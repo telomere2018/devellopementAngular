@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var population = require('../models/Population.js');
 var Telomere = require('../models/Telomere');
-
+var fs = require('fs');
 
 /* GET ALL sample */
 router.get('/sample/download', function (req, res, next) {
@@ -14,8 +14,17 @@ router.get('/sample/download', function (req, res, next) {
   });
 
 });
-
-
+//chemin telechargement
+router.get('/file/:id', function (req, res, next) {
+  console.log( 'on entre dans le serveur id ?' + req.params.id);
+  
+  fs.readFile("uploads/" + req.params.id, (err, data) => {
+    if (err) throw err;
+    console.log(' DATA ' + data);
+  });
+  console.log( 'readFile ? ' + req.params.id);
+  
+});
 
 /* GET SINGLE Population BY ID */
 router.get('/:id', function (req, res, next) {
@@ -24,7 +33,18 @@ router.get('/:id', function (req, res, next) {
     res.json(post);
   });
 });
-
+router.get('/download/:file(*)', function(req, res, next){ 
+  var file = req.params.file;
+  var path = require('path');
+  var path = path.resolve(".") + '/uploads/' + file;
+  res.download(path, file, function(err){
+    if (err){
+      console.log(err);
+    } else {
+      console.log('downloading successful');
+    }
+  });
+});
 /* SAVE Population */
 router.post('/population', function (req, res, next) {
 

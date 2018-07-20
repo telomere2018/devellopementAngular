@@ -30,6 +30,12 @@ import { AddSampleComponent } from './add-sample/add-sample.component';
 import { readFileService } from './services/read-file.service';
 import { DownloadFileComponent } from './download-file/download-file.component';
 import { OneFileComponent } from './one-file/one-file.component';
+import { nbCellsPipe } from './pipe/nbCells-pipe';
+import { CellsPipe } from './pipe/cells.pipe';
+import { oneFileService } from './services/one-file.service';
+
+
+
 
 
 const appRoutes: Routes = [
@@ -68,6 +74,11 @@ const appRoutes: Routes = [
     AddSampleComponent,
     DownloadFileComponent,
     OneFileComponent,
+    nbCellsPipe,
+    CellsPipe,
+   
+  
+    
     
   
   ],
@@ -77,7 +88,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    InputFileModule 
+    InputFileModule,
+     
   ],
   providers: [
     appareilService,
@@ -85,7 +97,9 @@ const appRoutes: Routes = [
     AuthGuard,
     UserService,
     telomereService,
-    readFileService
+    readFileService,
+    oneFileService
+   
 
 
   ],
